@@ -324,11 +324,29 @@ Information-seeking behavior is a fundamental aspect of both human and animal co
 The presence of such a model allows for the measurement of deviations from predictions, a concept central to predictive coding \cite{rao1999predictive}. Predictive coding posits that the brain continuously generates predictions about sensory inputs and then adjusts these predictions based on the actual input received. The discrepancies, or prediction errors, between expected and actual inputs are central for several cognitive processes, including visual perception and efficient coding \cite{rao1999predictive,ITTI20091295}, novelty and change detection \cite{behrens2007learning, summerfield2009expectation,garrido2013outlier}, exploration/exploitation trade-off \cite{cohen2007should,wilson2014humans}, and learning \cite{schulz2007serious,oudeyer2016intrinsic}.
 
 Crucially, information-seeking behavior is not just about reacting to prediction errors but involves the anticipation of these errors. This means that individuals engage in actions that they expect will maximize future prediction errors, thereby maximizing the informational gain. This anticipation of prediction errors, or the expected surprise, drives exploratory behavior and guides the search for new information \cite{friston2012perceptions}.
-Research on decision-making and information-seeking has provided robust theoretical frameworks for understanding this anticipatory aspect of information-seeking. Oaksford and Chater \cite{oaksford1994rational} demonstrated that human participants select information in a manner that maximizes the \emph{expected information gain} (EIG), rather than random exploration, reflecting a rational approach to data selection based on Bayesian principles. Similarly, Nelson \cite{nelson2005finding} developed a Bayesian framework to explain curiosity-driven behavior, showing that individuals seek information to maximize the reduction of uncertainty. Similar principles are moreover suggested to take place in animal behaviour \cite{gottlieb2013information,kidd2015psychology}.
+Research on decision-making and information-seeking has provided robust theoretical frameworks for understanding this anticipatory aspect of information-seeking. Oaksford and Chater \cite{oaksford1994rational} demonstrated that human participants select information in a manner that maximizes the \emph{expected information gain} (EIG), rather than random exploration, reflecting a rational approach to data selection based on Bayesian principles. Similarly, Nelson \cite{nelson2005finding} developed a Bayesian framework to explain curiosity-driven behavior, showing that individuals seek information to maximize the reduction of uncertainty. Similar principles are moreover suggested to take place in animal behavior \cite{gottlieb2013information,kidd2015psychology}.
 
 From the machine learning perspective, information-seeking is crucial in reinforcement learning (RL) and active learning, primarily addressing the exploration-exploitation dilemma. In multi-armed bandit problems, strategies such as Thompson Sampling and EXP3 effectively balance exploration and exploitation to maximize reward and gather new information \cite{robbins1952some, sutton1988learning, thompson1933likelihood, chapelle2011empirical, auer2002finite}. However, in more complex temporal credit assignment problems, where decisions impact future rewards across multiple steps, exploration often relies on random choices or heuristics \cite{sutton1998introduction}. To enhance exploration, methods such as pseudo-counts and expected information gain have however been proposed, where pseudo-counts estimate the novelty of states or actions, guiding exploration towards less familiar areas \cite{bellemare2016unifying}, while expected information gain integrates the potential for new information into the reward function, encouraging actions that maximize knowledge acquisition [REFS].
 
-The aim of this article is to revisit information-seeking behaviour in the case where subjects receive instructions to evaluate the causal link between their actions (interventions) and the resulting outcomes, without maximizing the total outcome. In this context, the problem reduces to assessing whether actions have an effect on the outcomes, and whether this effect is positive or negative at the final result level. The setup makes it possible to compare the subjects' behaviors with different action-selection models to determine the extent to which behavior arbitrates between information selection, random choice, and the pursuit of positive outcomes. Because estimating expected information gains is computationally expensive, we specifically seek to estimate how human behavior deviates from the expected optimal behavior (named here the ``ideal participant'') and reflects strategic choices involving a trade-off between the cognitive load of anticipation and the accuracy of the response.
+{\color{blue}
+\emph{Salience and information in the brain.}
+[TODO]
+La réduction de l'incertitude apparait comme un des principes fondamentaux grace auxquels le cerveau intègre et synthétise les informations en provenance de l'environnement, incluant à la fois la formation à long terme des champs récepteurs de neurones dans le cas du codage prédictif [ref], mais également l'intégration d'indices sensoriels multiples dans la résolution d'ambiguités perceptives [ref]. %La perception de l'écart entre le signal attendu et le signal effectif est un marqueur fondamental de 
+Il est ainsi reconnu de longue date que la mesure de l'écart à la distribution attendue est sous-jacent à de nombreux processus cognitifs et inférentiels [REF], implpiquant le cortex XX et de nombreuses aires XX.
+Par ailleurs, un aspect classique de la prise de décision dans un contexte d'incertitude concerne bien sûr la mesure du risque empirique et les choix liés à la réduction de ce risque en vue de maximiser un bénéfice, mettant en oeuvre le réseau de la prise de décision XXX implicant les aires XXX.
+
+Néanmoins, en l'absence de bénéfice ou de coût évident (extérieur), %nécessitent également la prise en compte de l'incertitude dans le choix de l'action, 
+le rôle de la perception (ou de la prédiction) de l'incertitude dans la sélection de l'action est moins bien connu et moins bien documenté. [A DEVELOPPER]}
+
+
+%Neuroscientific research has indicated that various brain regions, including the prefrontal cortex, anterior cingulate cortex, and the insula, are involved in encoding uncertainty. For instance, the prefrontal cortex is thought to integrate sensory information and contextual clues to form probabilistic representations of the environment \cite{doya2007bayesian}. The anterior cingulate cortex has been implicated in conflict monitoring and decision-making under uncertainty, reflecting the brain's effort to resolve discrepancies between expected and actual outcomes \cite{botvinick2004conflict}. Additionally, the insula is associated with the subjective experience of uncertainty and risk, processing the emotional responses related to uncertain situations \cite{paulus2006insular}. Understanding these neural mechanisms is essential for developing models that accurately reflect how uncertainty influences cognitive processes and behavior.
+% József Fiser and colleagues have explored how the brain employs Bayesian inference to represent and manage uncertainty, suggesting that neural circuits are optimized to predict sensory inputs in a probabilistic manner \cite{fiser2010statistically}. Máté Lengyel's work has highlighted the role of synaptic plasticity in learning probabilistic representations, demonstrating how neural networks can adapt to uncertain environments \cite{lengyel2015hippocampal}. Florent Meyniel has contributed to the field by investigating how the brain tracks the volatility of the environment, proposing that the brain continuously updates its beliefs based on the reliability of incoming information \cite{meyniel2016human}. These studies underscore the complexity and sophistication of neural mechanisms underlying the representation of uncertainty.
+
+%
+
+
+
+The aim of this article is to revisit information-seeking behavior in the case where subjects receive instructions to evaluate the causal link between their actions (interventions) and the resulting outcomes, without maximizing the total outcome. In this context, the problem reduces to assessing whether actions have an effect on the outcomes, and whether this effect is positive or negative at the final result level. The setup makes it possible to compare the subjects' behaviors with different action-selection models to determine the extent to which behavior arbitrates between information selection, random choice, and the pursuit of positive outcomes. Because estimating expected information gains is computationally expensive, we specifically seek to estimate how human behavior deviates from the expected optimal behavior (named here the ``ideal participant'') and reflects strategic choices involving a trade-off between the cognitive load of anticipation and the accuracy of the response.
 
 In particular, we develop a method combining (exact) sequential bayesian inference with Thompson sampling for model comparison and causal inference. The key concepts manipulated are the concept of \emph{expected improvement} and   
 \emph{information seeking}, in relation with the problem of sequential design.
@@ -409,28 +427,16 @@ We show that, framed as a hierarchical Bayesian model estimation problem, the co
 
 %On the other sie, l }
 
-\section{Problem setting}
+\section{Experiments }
 
-%We propose in this paper to extend this principle toward the case of model building in goal-directed action selection tasks: what is the appropriate strategy to choose when the objective is to understand the relationship between different actions and an their outcomes? 
-
-
-
-%I
-Notations :
+{\color{blue} The Causal project [TODO] 
 \begin{itemize}
-    \item $a \in \mathcal{A}$ : action (decision or motor command)
-    \item $o \in \mathcal{O}$ : outcome : state observed after action $a$ is actuated
-    %\item $r \in \mathbb{R}$ : (quantitative) reward 
-    %\item $Q(a)$ : action-value function = policy parameters
-    %\item $\pi(a|Q)$ : (stochastic) action selection = policy
-    \item $\theta$ : statistic model parameters %(mean, variance)
-    \item $p(o|a)$ : (unknown) action/outcome statistical relationship
-    \item $q(\theta|o_{1:t},a_{1:t})$ : (posterior) distribution of model parameters. In practice : $\beta$-model 
+    \item sequential estimation
+    \item model comparison
+    \item causal score, DP, literature
 \end{itemize}
-
-
+}
 \subsection{The ``Volleyball'' task}
-
 We consider here a simple model estimation task, where a conditional distribution $p(O|A)$ %(where the outcome $o \in O$ conditionally depends on the action $a \in A$). 
 has to be guessed from observing samples. %We want to understand whether the behavior adopted in information-seeking situations resembles that of saliency-based saccade selection in vision, i.e. if action selection is oriented toward the actions whose statistics differs the most from the average outcome statistics, that is the one that maximises the ``Bayesian surprise'' or ``Epistemic Value''. To this end, we consider here a minimal estimation problem consisting of estimating the expected outcome of two concurrent Bernouilli distributions. 
 
@@ -447,13 +453,39 @@ By alternating 'PLAY' and 'NOT PLAY', the human participants obtains samples of 
 
 This task addresses the question of action selection when the main objective is to learn a model of the action-outcome relationship, in order to make an appropriate ``buy'' decision. In that case, the participant needs to make a series of actions (PLAY/NOT PLAY) under an objective that is estimate the statistical relationship between actions and outcomes, i.e. the effect of the new player on the team statistics.
 
+\subsection{MEG experiment}
+{\color{blue}  [TODO] }
+\subsection{SEEG experiment}
+{\color{blue}  [TODO] }
+
+
+\section{Intervention through action: the brain as an ideal sampler}
+
+%We propose in this paper to extend this principle toward the case of model building in goal-directed action selection tasks: what is the appropriate strategy to choose when the objective is to understand the relationship between different actions and an their outcomes? 
+In order to compare with subject's decisions, we conceptualize an agent having to take decisions in a stochastic environment where the result of the action (outcome) is uncertain.
+We assume that the agent has to learn the effect of its action by interacting with the environment. During learning, the agent will do two things : (i) build a statistical model of its environment and (ii) update its behavior (selection of actions). 
+
+
+%I
+Notations :
+\begin{itemize}
+    \item $a \in \mathcal{A}$ : action (decision or motor command)
+    \item $o \in \mathcal{O}$ : outcome : state observed after action $a$ is actuated
+    %\item $r \in \mathbb{R}$ : (quantitative) reward 
+    %\item $Q(a)$ : action-value function = policy parameters
+    %\item $\pi(a|Q)$ : (stochastic) action selection = policy
+    \item $\theta$ : statistic model parameters %(mean, variance)
+    \item $p(o|a)$ : (unknown) action/outcome statistical relationship
+    \item $q(\theta|o_{1:t},a_{1:t})$ : (posterior) distribution of model parameters. In practice : $\beta$-model 
+\end{itemize}
+
+
 
 
 
 \subsection{Beta ideal observer}
 
-In order to compare with subject's decisions, we conceptualize an agent having to take decisions in a stochastic environment where the result of the action (outcome) is uncertain.
-We assume that the agent has to learn the effect of its action by interacting with the environment. During learning, the agent will do two things : (i) build a statistical model of its environment and (ii) update its behavior (selection of actions). 
+
 %Both the model and the policy are parametric models. 
 
 %A typical strategy is trying different actions, observing their outcomes and memorizing the average outcome for each action.  
@@ -523,21 +555,12 @@ $\alpha_0^a$ = $\beta_0^a$ = 1 $\forall a$ and for $t>0$:
 \caption{{\bf A. Ideal Observer (parameter estimation)}. Action $a$ and outcome $o$ are the observed variables. A belief on the Bernoulli parameter $\theta$ is inferred from the past estimation and the current observations. {\bf B. Ideal Participant (predictive model of action selection)}. At step $t$, the generative model predicts the next observations from Thompson sampling, allowing to select the next action according to an MLE objective.}
 \label{fig:1}
 \end{figure}
-\subsection{Intervention through action: the brain as an ideal sampler}
+\subsection{Expected Information Gain (EIG) maximization}
 
-%Inspired by the Bayesian ideal observer \cite{geisler1989sequential}, 
-We  develop a model of optimal sampling that we call the ``ideal participant''. An ideal participant is defined as an action selection mechanism (an "actor") that is built on top of an ideal observer.
-%Let ${D}_{t}=(a_1,o_1), ..., (a_t,o_t)$ be a sequence of observations; a Bayesian observer is a recursive parameter update strategy that relies on Bayes formula, i.e. $q(\theta|\mathcal{D}_n) \propto p(o_n|a_n, \theta) \times q(\theta|\mathcal{D}_{n-1})$. An important element is the initial \emph{prior} $q_0(\theta)$ reflecting the initial guess about the parameters. 
-%In an active sampling strategy, one need to consider specific series of actions $(a_1,...,a_n,...)$, and estimate how the corresponding  observations participates in reducing the uncertainty of the observer. 
-If the role of the observer was to build a  model $\theta$, reflecting the statistics of the outcomes, %obtained under any action $a$, 
-the role of the agent (ideal participant) is to choose the next action.
-
-A classic (naive) viewpoint on model estimation is that the agent should move freely (randomly) in order to allow the estimation process to identify environment states, and use the model to improve its behavior once enough evidence has been collected from the environment. %, that ultimately may help the controller take good decisions. The two problems (estimating the model and control) are generally considered as independent. Moving freely (independently if the model) may indeed be a god strategy   
-Nevertheless, many situations prevent exhaustive (uniform) sampling of the environment before making a decision, particularly in cases where data access is costly or the number of actions is limited. The question then arises as to which action to choose in order to produce the best model in a limited time/resources.
 
 
 The guiding principle of our ideal participant controller is that actions should serve to sample sensory data.
-The objective of the controller is here to provide sensory data to the model, in order to have effective model updates. 
+The objective of the controller is here to provide relevant sensory data to the model, in order to have effective model updates. 
 %Many active inference models use objectives that seek to estimate the improvement of the model, relying on a principle of duality \cite{todorov2002optimal}, which states that the action that maximizes the update of the model (learning improvement) is also the one that maximizes the \emph{reduction} of the prediction error.
 
 
@@ -552,7 +575,7 @@ F(o_t,a_t,q) = \mathbb{E}_{\theta\sim q(\Theta)}\left[ -\log p(o_t|\theta) + \lo
 \end{align}
 with  $q_{t-1}(\Theta)$ being the belief about $\theta_t$ before observing the data sample ($a_t$ and $o_t$) and $q(\Theta)$ being the belief about $\theta$ when considering the sample.
 
-The VFE criterion combines the (negative) log-likelihood of the observation under the current model belief with the Kullback-Leibler distance of the model belief before and after observing the data sample ($a_t$ and $o_t$). The difference between the two distributions, known as the \emph{Bayesian Surprise}, quantifies the reduction of uncertainty provided by observing the data, here:
+The VFE criterion combines the (negative) log-likelihood of the observation under the current model belief with the Kullback-Leibler divergence of the model belief before and after observing the data sample ($a_t$ and $o_t$). The difference between the two distributions, known as the \emph{Bayesian Surprise}, quantifies the reduction of uncertainty provided by observing the data, here:
 \begin{align}\label{eq:BS}
 \text{KL}(q_t(\Theta)||q_{t-1}(\Theta)) =\mathbb{E}_{\theta \sim q(.|a_t, o_t, h_{t-1})} \log q(\theta|a_t, o_t, h_{t-1}) - \log q(\theta|h_{t-1})    
  \end{align}
@@ -562,6 +585,8 @@ This quantity is used in optimization as the regularisation constraint associate
 Interesting to this estimation formula is the role of the free variable $a_t$, i.e. the action. Depending on the choice, it greatly influences the value of the VFE, and more generally exerts a control on the distribution of $\theta$. Put simply, the action conditions the data model of the observation. %, i.e. one can predict what will be observed, given the action. In the context of model estimation and optimization, the action (or the control) plays the role of an auxiliary variable, \emph{allowing to have a control on the observed data}. 
 There, the problem become that of minimizing the prediction error under the range of possible controls, knowing that each possible action $a_t$ will conducts to an outcome $o_t$ that can be \emph{predicted} according to the current model. 
 This is consistent with the predictive coding principle [REF], interpreted here as \emph{predicting the prediction error}.
+
+{\color{blue} Introducing the expected information gain (EIG)}
 
 Before action selection, one can thus use the generative model to make a prediction about the effect of each action, and choose the one that contributes to minimize the error (or the surprise). 
 It becomes obvious however (a well known caveat) that minimizing the prediction error alone, as an ideal observer would do, can not be the objective of the controller, because minimizing the prediction error generally implies minimizing the action diversity (dark room problem, [REF]).
@@ -587,6 +612,8 @@ that is is an estimator of the \emph{mutual information} $I(\Theta;A_t, O_t|h_{t
 At each step, the information gain informs the actor how good the action $a$ is at reducing the uncertainty, that is, in essence, the objective of model learning. %,, that is equal to. In a predictive setup, it is also  
 %Here the ``value'' of an observation is reflected in the information it provides to the model. 
 
+
+\subsection{Information bottleneck in an action/outcome channel}
 It is convenient here to remark that the Mutual Information can be decomposed in three terms, i.e. 
 \begin{align}\label{eq:MI}
 I(\Theta;O_t,A_t|h_{t-1}) &= I(\Theta;O_t|A_t,h_{t-1}) + I(\Theta;A_t|h_{t-1})\\\nonumber
@@ -638,25 +665,8 @@ where the selection of action should be based on comparing two quantities:
 \end{itemize}
 Only the combination of both may provide a comprehensive modeling of the environment, that can be attained at the cost of maintaining a general (marginal) model of the observations.   
 
-Importantly, the objective of eq.(\ref{eq:CC}) can be rewritten as $\mathbb{E}_{\theta\sim q(\theta|a_t)} \text{KL} ( p(O_t|\theta)|| \tilde{p}(O_t))$, that is the Kullback-Leibler divergence between the outcome distribution of the current action and that of the marginal distribution. The action that is \emph{the most distant} from the marginal distribution is thus supposed to be selected more often. This "maximum distance" principle for action selection conducts in fact to an equilibrium state in which both action-outcome distributions should remain at equal distance from the marginal distribution, favouring alternate action selection in the long run. 
+Importantly, the objective of eq.(\ref{eq:CC}) can be rewritten as $\mathbb{E}_{\theta\sim q(\theta|a_t)} \text{KL} ( p(O_t|\theta)|| \tilde{p}(O_t))$, that is the Kullback-Leibler divergence between the outcome distribution of the current action and that of the marginal distribution. The action that is \emph{the most distant} from the marginal distribution is thus supposed to be selected more often. This "maximum divergence" principle for action selection conducts in fact to an equilibrium state in which both action-outcome distributions should remain at equal distance from the marginal distribution, favouring alternate action selection in the long run. 
 
-In our model-based setup, instead of calculating the expectation, we rather consider doing \emph{prediction by sampling}, that means considering the result of sampling the generative model associated with each action $q(\theta,s|a)$, consistently with the Thompson sampling principle [REF].  
-In our Bernoulli case,  each action is associated with a Beta model, and estimating the channel capacity consists for each action $a$ in:
-\begin{itemize}
-    \item (i) sampling the Bernoulli parameter $\tilde{\theta}_a$ from the Beta model,
-    \item (ii) sampling the Bernoulli parameter $\tilde{\theta}$ from the marginal model
-    %\item (ii) generating an outcome $\tilde{o}_a$ by sampling the Bernoulli model,
-    %\item (iii) calculating the log-probability difference : $\log p(\tilde{o}_a|\tilde{\theta}_a) - \log \tilde{p}(\tilde{o}_a)$
-    \item (iii) estimating $\text{KL}(p(O|\tilde{\theta}_a)||p(O|\tilde{\theta})|)$
-\end{itemize}   
-and select the action with maximum value. 
-
-This selection of action $a_t$ (action sampling) is then followed by:
-\begin{itemize}
-\item (iv) observing the outcome $o_t$
-\item (v) updating the Beta model $q(\Theta|a_t)$
-\item (vi) updating the marginal model $\tilde{q}(\Theta)$
-\end{itemize}
 
 
 
@@ -702,22 +712,91 @@ This selection of action $a_t$ (action sampling) is then followed by:
 
 % ... (see previous version of the latex document if needed to retrieve info about Active Inference)
 
-\subsection{Salience and information in the brain}
+\subsection{Learning beyond utility by combining knowledge and behavior improvement}
 
-[TODO]
-{\color{blue}
-La réduction de l'incertitude apparait comme un des principes fondamentaux grace auxquels le cerveau intègre et synthétise les informations en provenance de l'environnement, incluant à la fois la formation à long terme des champs récepteurs de neurones dans le cas du codage prédictif [ref], mais également l'intégration d'indices sensoriels multiples dans la résolution d'ambiguités perceptives [ref]. %La perception de l'écart entre le signal attendu et le signal effectif est un marqueur fondamental de 
-Il est ainsi reconnu de longue date que la mesure de l'écart à la distribution attendue est sous-jacent à de nombreux processus cognitifs et inférentiels [REF], implpiquant le cortex XX et de nombreuses aires XX.
-Par ailleurs, un aspect classique de la prise de décision dans un contexte d'incertitude concerne bien sûr la mesure du risque empirique et les choix liés à la réduction de ce risque en vue de maximiser un bénéfice, mettant en oeuvre le réseau de la prise de décision XXX implicant les aires XXX.
+In everyday life, the pursuit of knowledge (information seeking) often combines with the necessity to achieve certain goals related to survival and social success (reward seeking). The choice of an action or a behavior often involves balancing these two imperatives, a problem often summarized under the term 'exploration/exploitation trade-off'. This problem has been recognized for a long time, but, surprisingly, no consensus formalization seems to have emerged so far.
 
-Néanmoins, en l'absence de bénéfice ou de coût évident (extérieur), %nécessitent également la prise en compte de l'incertitude dans le choix de l'action, 
-le rôle de la perception (ou de la prédiction) de l'incertitude dans la sélection de l'action est moins bien connu et moins bien documenté. [A DEVELOPPER]}
+Indeed, classic learning methodologies often involve the consideration of finite-state models, where the incorporation of the environment's structure (the construction of a model) is only an auxiliary step, generally adressed using ad-hoc heuristics. Indeed, the fact that there is no persistent search for information in machine learning models often relies on the stationary and finite (bounded) nature of most learning problems, a well-known limitation when real-world implementations need to be considered [REF]. Moreover, in engineering, the model is often given in advance, and, in this case, the optimization relies on the inversion of a model (model-based learning) [REF]. In machine learning, optimization often focuses solely on behavioral improvement, based on predefined observation/response patterns (supervised learning), or on an external reward signal, which can be delayed in time (temporal credit assignment problem). Even when the  uncertainty and noisiness of the environment is considered, the target optimal policy is often a deterministic one, aimed at optimizing an average over a noisy (discounted) sum of of rewards.
+
+This is contrary to most observations made in behavioral sciences and ethology \cite{levine2018reinforcement}: humans and animals often tend to maintain an active, and thus random, component in their behavior, even in the presence of problems with an optimal solution. The presence of an exploration component cannot be explained in terms of optimal control and must therefore be addressed within a framework that considers the gain of information as an objective in itself, not subordinated to the maximization of rewards.
+
+{\color{blue} Nevertheless, and this is the point we are developing here, there can be a truly relevant aspect to maintaining an information term, in the sense that the knowledge one can have of a model can grow almost indefinitely, far beyond the utility it provides. }
+
+Combining information and reward maximization in a same optimization procedure can be solved in a relatively simple manner once considering behavior improvement as a part of knowledge improvement. In short, a same formalisation can be applied to the learning of the parameters of a policy and to the ones utilized in the learning of the model. Here we consider the case where  a single policy is used both for knowledge improvement and behavior improvement.
+
+Then, improving the behavior implies fitting an empirical policy to the observed extrinsic rewards, in a fashion very similar to the one proposed in \cite{haarnoja2018soft}.
+In our problem at hand, a statistics over action selections can be provided from observing choices over time. This is the case, for instance, for a coach that would select (or not) a player for matches. Assume now that $\phi=(\pi, \theta)$ with $\pi$ a parameter for action selection (reflecting a proportion of action, i.e. ``PLAY'' or ``NOT PLAY'') and $\theta$ a parameter for predicting the outcome (i.e. ``WIN'' or ``LOSE''). Here $\pi$ would reflect the choices of the coach, and $q(\PI)$ (action selection statistics) could be updated at each step. %Knowing $\theta_x$ would help to provide a more comprehensive model of the way the observations are generated. 
+%\text{max}_{x_t}\text{KL}(q_{t|t}(\Pi, \Theta)||q_{t|t-1}(\Pi, \Theta))
+%\end{align}
+Then, each observation of $o_t$, knowing $a_t$, would allow to improve the generative model by: \begin{align}\label{eq:BS-joint}
+I(\Theta,\Pi;a_t,o_t|h_{t-1})= \mathbb{E}_{\theta,\pi\sim q(\theta,\pi|a_t,o_t,h_{t-1})}\log q(\theta,\pi|a_t, o_t, h_{t-1}) - \log q(\theta,\pi|h_{t-1}) 
+\end{align}
+reflecting both the knowledge improvement about the coach's behavior and match's outcome after observing the data sample.
 
 
-%Neuroscientific research has indicated that various brain regions, including the prefrontal cortex, anterior cingulate cortex, and the insula, are involved in encoding uncertainty. For instance, the prefrontal cortex is thought to integrate sensory information and contextual clues to form probabilistic representations of the environment \cite{doya2007bayesian}. The anterior cingulate cortex has been implicated in conflict monitoring and decision-making under uncertainty, reflecting the brain's effort to resolve discrepancies between expected and actual outcomes \cite{botvinick2004conflict}. Additionally, the insula is associated with the subjective experience of uncertainty and risk, processing the emotional responses related to uncertain situations \cite{paulus2006insular}. Understanding these neural mechanisms is essential for developing models that accurately reflect how uncertainty influences cognitive processes and behavior.
-% József Fiser and colleagues have explored how the brain employs Bayesian inference to represent and manage uncertainty, suggesting that neural circuits are optimized to predict sensory inputs in a probabilistic manner \cite{fiser2010statistically}. Máté Lengyel's work has highlighted the role of synaptic plasticity in learning probabilistic representations, demonstrating how neural networks can adapt to uncertain environments \cite{lengyel2015hippocampal}. Florent Meyniel has contributed to the field by investigating how the brain tracks the volatility of the environment, proposing that the brain continuously updates its beliefs based on the reliability of incoming information \cite{meyniel2016human}. These studies underscore the complexity and sophistication of neural mechanisms underlying the representation of uncertainty.
+Importantly here,  an additional element (reward information) comes into the play. In effect,  $o_t$ also indicates whether the choice was correct or incorrect (``WIN'' or ``LOSE''). %In a RL setup, this can be interpreted as an incentive to bias the coach's choice (i.e $\theta_x$) in favor of a policy parameter that would increase the probability of winning. 
+Consider for instance $\theta$ being the ``WIN'' expectation of a Bernoulli distribution. Assuming $\pi$ being the ``PLAY'' expectation, then taking $\pi \propto\exp(\theta)$ would be consistent with biasing the selection of action toward maximizing the ``WIN'' expectation [ref Levine]. More generally, %assuming such strategy should be adopted by the coach, 
+this correspondence may be given by $q(\Pi|a_t, o_t, h_{t-1})$, i.e. a belief about $\pi$ (action selection) given the outcome (i.e. the action validity), and, more generally, the history of previously observed actions and outcomes. Injecting this relation into equation (\ref{eq:BS-joint}) may thus allows to incorporate reward information into the information gain maximization. This would conduct to a concurrent (or dual) optimization, reflecting both knowledge and action validity improvement (see also \cite{dauce2022concurrent}).
 
-%
+A possible relation between a information gain on the parameters of a behavior model and the maximization of rewards is given by the policy matching approach, originally proposed by \cite{haarnoja2018soft}, where the parameters of a policy $\pi(a)$ are matched to the reward expectation.
+The inclusion of the entropy term in the optimization formulation relies on a temperature parameter, analogous to what can be found in stochastic optimization algorithms. This parameter, denoted as $\beta$ (inverse temperature), is involved in the actor's optimization formula as follows:
+$$\max_\pi \mathbb{E}_{a\sim \pi(a)} \left(\log p^*(a|Q) - \log \pi(a)\right) = \max \left(\beta Q(a) - \log \pi(a)\right)$$
+Here, $Q(a)$ represents the action value function (the critic), and $\pi(a)$ represents the policy (or actor), viewed as a probability distribution over actions. Interpreted in our informational setup, action selection appears to rely on maximizing an information gain between the value parameters of the value and the action.  
+
+Adapted to our mixed information gain setup, the policy matching naturally combines in two expected information gains (EIG) like :
+\begin{small}
+\begin{align}\label{eq:BS-SAC}
+\max_{a_t} \mathbb{E}_{o_t} \mathbb{E}_{\substack{\pi \sim q(\pi|a_t,h_{t-1})\\ \theta\sim q(\theta|a_t,o_t,h_{t-1})}} \left[\log q(\theta|a_t, o_t, h_{t-1}) - \log q(\theta|h_{t-1})\right] + \left[\log q^*(\pi|a_t, o_t, h_{t-1}, \beta) - \log q(\pi|h_{t-1})\right]
+\end{align}
+\end{small}
+with $q^*$ a target distribution on the policy parameters estimated from the current action, outcome and history, and $\beta$ the inverse temperature. Notably, the right EIG term can be connected to the policy matching from Bayes inversion (see Appendix [TODO]). It is important to notice the strong formal similarity between the two EIG terms, implying in both case to compare a KL divergence between a ``data informed'' posterior distribution and a ``marginal'' prior distribution of the parameters. An important difference though is that $\theta$ is sampled from the posterior (i.e. knowing $a_t$ and $o_t$), while $\pi$ is sampled from the prior only, with the parameters of the ``marginal''  policy. The consequence is that the first term corresponds to a maximization of the divergence, while the second implements a minimization (minimizing a divergence between the policy and exponentiated rewards). Each term defines a distinct objective (maximizing information vs. matching the behavior to the rewards), which naturally conducts to find a compromise, i.e. effectively implements a trade-off between exploration and exploitation (see also \cite{dauce2022concurrent}).
+
+
+%Then assuming $q_{t|t-1}(\Pi)$ the current belief (obtained from observing the coach's choices), one should consider maximizing:
+%\begin{align}\label{eq:BS-cond}\text{max}_{x_t}\text{KL}(q_{t|t}(\Pi|\Theta)||q_{t|t-1}(\Pi)) 
+%\end{align}
+%the information gain about the behavior, reflecting the (expected) behavior improvement expected from considering outcomes. 
+
+%The complementary conditional distribution is $q(\Theta|Q)$ (a belief about $\theta$ given a belief about $Q$).
+%In a predictive setup, one can now predict the next update of $\Theta$ knowing the current belief on $Q$. This is noted $q_t(\Theta,Q) = q_t(\Theta|Q)q(Q) $ = a winning probability, then one can assume . Assuming 
+%$$\text{KL}(q_{t}(Q|\Theta)||q_{t-1}(Q)) + \text{KL}(q_{t}(\Theta)||q_{t-1}(\Theta|Q))$$
+%reflecting the separation of the optimization in two terms. The left one reflecting the update of $Q$ after observing $x_t$ and $y_t$, and the right being the data model improvement, knowing $Q$.
+
+%The information gain can be rewritten as: 
+%with the left term reflecting the ``matching'' of the coach's choice with the proportion of ``WIN'', and more generally the matching of the behavior with rewards. The putative mismatch between $Q$ and $\Theta$ development of the formula, given in the algorithm, conducts to 
+
+\subsection{Information seeking Thompson sampling and the ideal participant}
+%Inspired by the Bayesian ideal observer \cite{geisler1989sequential}, 
+We  develop a model of optimal sampling that we call the ``ideal participant''. An ideal participant is defined as an action selection mechanism (an "actor") that is built on top of an ideal observer.
+%Let ${D}_{t}=(a_1,o_1), ..., (a_t,o_t)$ be a sequence of observations; a Bayesian observer is a recursive parameter update strategy that relies on Bayes formula, i.e. $q(\theta|\mathcal{D}_n) \propto p(o_n|a_n, \theta) \times q(\theta|\mathcal{D}_{n-1})$. An important element is the initial \emph{prior} $q_0(\theta)$ reflecting the initial guess about the parameters. 
+%In an active sampling strategy, one need to consider specific series of actions $(a_1,...,a_n,...)$, and estimate how the corresponding  observations participates in reducing the uncertainty of the observer. 
+If the role of the observer was to build a  model $\theta$, reflecting the statistics of the outcomes, %obtained under any action $a$, 
+the role of the agent (ideal participant) is to choose the next action.
+
+A classic (naive) viewpoint on model estimation is that the agent should move freely (randomly) in order to allow the estimation process to identify environment states, and use the model to improve its behavior once enough evidence has been collected from the environment. %, that ultimately may help the controller take good decisions. The two problems (estimating the model and control) are generally considered as independent. Moving freely (independently if the model) may indeed be a god strategy   
+Nevertheless, many situations prevent exhaustive (uniform) sampling of the environment before making a decision, particularly in cases where data access is costly or the number of actions is limited. The question then arises as to which action to choose in order to produce the best model in a limited time/resources.
+
+In our model-based setup, instead of calculating the expectation, we rather consider doing \emph{prediction by sampling}, that means considering the result of sampling the generative model associated with each action $q(\theta,s|a)$, consistently with the Thompson sampling principle [REF].  
+In our Bernoulli case,  each action is associated with a Beta model, and estimating the channel capacity consists for each action $a$ in:
+\begin{itemize}
+    \item (i) sampling the Bernoulli parameter $\tilde{\theta}_a$ from the Beta model,
+    \item (ii) sampling the Bernoulli parameter $\tilde{\theta}$ from the marginal model
+    %\item (ii) generating an outcome $\tilde{o}_a$ by sampling the Bernoulli model,
+    %\item (iii) calculating the log-probability difference : $\log p(\tilde{o}_a|\tilde{\theta}_a) - \log \tilde{p}(\tilde{o}_a)$
+    \item (iii) estimating $\text{KL}(p(O|\tilde{\theta}_a)||p(O|\tilde{\theta})|)$
+\end{itemize}   
+and select the action with maximum value. 
+
+This selection of action $a_t$ (action sampling) is then followed by:
+\begin{itemize}
+\item (iv) observing the outcome $o_t$
+\item (v) updating the Beta model $q(\Theta|a_t)$
+\item (vi) updating the marginal model $\tilde{q}(\Theta)$
+\end{itemize}
+
+
+\subsection{Biased participants}
+
 
 
 
